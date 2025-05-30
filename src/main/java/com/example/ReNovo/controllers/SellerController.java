@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 // import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ReNovo.models.SellerLoginModel;
 import com.example.ReNovo.models.SellerModel;
 import com.example.ReNovo.services.SellerServices;
 
@@ -40,6 +41,12 @@ public class SellerController {
     @PostMapping("/sellerRegister")
     public Object sellerRegistration(@RequestBody SellerModel sellerData){
         return service.sellerRegistration(sellerData);
+    }
+
+    // seller login
+    @PostMapping("/sellerLogin")
+    public String sellerLogin(@RequestBody SellerLoginModel loginData){
+        return service.sellerLogin(loginData);
     }
 
     // update seller details 

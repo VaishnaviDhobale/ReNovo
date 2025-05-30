@@ -1,10 +1,12 @@
 package com.example.ReNovo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.ReNovo.models.UserLoginModel;
 import com.example.ReNovo.models.UserModel;
 import com.example.ReNovo.repository.UserRepository;
 
@@ -16,20 +18,42 @@ public class UserServices {
     // user registration
     public Object userRegistration(UserModel userData) {
         try {
+            Optional<UserModel> existingUser = repo.findByEmail(userData.getEmail());
+
+            if (existingUser.isPresent()) {
+                return "You already have an account. Please log in.";
+            }
+
             repo.save(userData);
-            return "User register successfully.";
+            return "User registered successfully.";
         } catch (Exception e) {
             return e.getMessage();
         }
     }
 
-    // get all user 
-     public List<UserModel>getAllUsers() {
-           return repo.findAll();
+    // user login
+    public String userLogin(UserLoginModel loginData) {
+        
+        Optional<UserModel> userOpt = repo.findByEmail(loginData.getEmail());
+        if (userOpt.isEmpty()) {
+            return "User not found, please register.";
+        }
+        UserModel user = userOpt.get();
+
+        if (user.getPassword().equals(loginData.getPassword())) {
+            return "Login successful!";
+        } else {
+            return "Incorrect password, please try again.";
+        }
     }
 
-    // get user by id 
-    public Object getUserById(Long id){
+    // get all user
+    public List<UserModel> getAllUsers() {
+        return repo.findAll();
+    }
+
+    // get user by id
+    public Object getUserById(Long id) {
         try {
             if (repo.existsById(id)) {
                 return repo.findById(id);
@@ -60,7 +84,7 @@ public class UserServices {
         }
     }
 
-    // delete user details 
+    // delete user details
     public Object deleteUserAc(Long id) {
         try {
             if (repo.existsById(id)) {

@@ -15,41 +15,19 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Products")
+@Table(name = "UserLogins")
 
-public class ProductModel {
 
+
+public class SellerLoginModel {
+    
     @Id
     @GeneratedValue
     private long id;
 
     @Column
-    private String productTitle;
+    private String email;
 
     @Column
-    private String category;
-
-    @Column
-    private String productCondition;
-
-    @Column
-    private String price;
-
-    @Column
-    private String sellPrice;
-
-    @Column
-    private String negotiable;
-
-    @Column
-    private String quantity;
-
-    @Column
-    private String description;
-
-    @Column
-    private String reason;
-
-    @Column
-    private String photo;
+    private String password;
 }

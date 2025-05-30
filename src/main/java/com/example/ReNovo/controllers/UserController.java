@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 // import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ReNovo.models.UserLoginModel;
 import com.example.ReNovo.models.UserModel;
 import com.example.ReNovo.services.UserServices;
 
@@ -38,6 +39,12 @@ public class UserController {
     @PostMapping("/userRegister")
     public Object userRegistration(@RequestBody UserModel userData){
         return service.userRegistration(userData);
+    }
+
+    // user login
+    @PostMapping("/userLogin")
+    public String userLogin(@RequestBody UserLoginModel loginData){
+        return service.userLogin(loginData);
     }
 
     // update user details 

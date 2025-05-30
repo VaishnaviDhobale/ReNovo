@@ -35,9 +35,9 @@ public class ProductsController {
     }
 
     // add product
-    @GetMapping("/addProduct")
+    @PostMapping("/addProduct")
     public Object addProduct(@RequestBody ProductModel product){
-        return service.addProduct(product);
+        return service.addProducts(product);
     }
 
     // update Product 
@@ -48,8 +48,8 @@ public class ProductsController {
 
     // delete product
     @DeleteMapping("/deleteProduct/{id}")
-    public Object deleteProductAccount(@PathVariable Long id){
-        return service.deleteProductAc(id);
+    public Object deleteProduct(@PathVariable Long id){
+        return service.deleteProduct(id);
     }
 
 

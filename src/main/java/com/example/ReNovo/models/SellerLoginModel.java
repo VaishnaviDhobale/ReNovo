@@ -22,12 +22,11 @@ import lombok.Setter;
 public class SellerLoginModel {
     
     @Id
-    @GeneratedValue
     private long id;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String password;
 }

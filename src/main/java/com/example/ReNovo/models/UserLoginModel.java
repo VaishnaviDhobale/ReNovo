@@ -25,7 +25,7 @@ public class UserLoginModel {
     @GeneratedValue
     private long id;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column

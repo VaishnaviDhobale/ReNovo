@@ -18,10 +18,15 @@ public class UserServices {
     // user registration
     public Object userRegistration(UserModel userData) {
         try {
-            Optional<UserModel> existingUser = repo.findByEmail(userData.getEmail());
+            Optional<UserModel> existingUserByEmail = repo.findByEmail(userData.getEmail());
+            Optional<UserModel> existingUserByUsername = repo.findByUsername(userData.getUsername());
 
-            if (existingUser.isPresent()) {
+            if (existingUserByEmail.isPresent()) {
                 return "You already have an account. Please log in.";
+            }
+
+            if(existingUserByUsername.isPresent()){
+                return "Username alredy taken by another user.";
             }
 
             repo.save(userData);
